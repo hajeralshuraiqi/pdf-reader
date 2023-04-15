@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>808965743532-pi15maq8rmqdset0tbdpf94ehmrogq1k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.808965743532-pi15maq8rmqdset0tbdpf94ehmrogq1k</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDwQqaQYBrmHVUug6Jqr-XRz339QNHKD4A</string>
+	<key>GCM_SENDER_ID</key>
+	<string>808965743532</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.rihal.pdfreader</string>
+	<key>PROJECT_ID</key>
+	<string>pdfreader-bbd38</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pdfreader-bbd38.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:808965743532:ios:b48e202d9a4df35f58d009</string>
+</dict>
+</plist>
