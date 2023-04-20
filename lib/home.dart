@@ -31,24 +31,6 @@ class _HomeState extends State<Home> {
   }
 
 
-  // Future<List<String>> extractTextFromPdfAndConvertToKeywords(File pdfFile) async {
-  //   List<String> keywords = [];
-  //
-  //   try {
-  //     PDFDoc doc = await PDFDoc.fromFile(pdfFile);
-  //     String text = await doc.text;
-  //
-  //     // Extract words from the text and remove duplicates
-  //     keywords = text.split(RegExp(r'\W+')).toSet().toList();
-  //
-  //   } catch (e) {
-  //     print('Error extracting keywords from PDF: $e');
-  //   }
-  //
-  //   return keywords;
-  // }
-
-
   Future<Map<String, List<String>>> extractTextFromPdfAndConvertToKeywords(File pdfFile) async {
     List<String> keywords = [];
     List<String> sentences = [];
@@ -78,14 +60,15 @@ class _HomeState extends State<Home> {
 
 
 
-  Future<void> uploadPdfToFirebaseStorageAndSaveToFirestore(File pdfFile) async {
+
+
+  Future<void> uploadPdfToFirebaseStorageAndSaveToFirestore(BuildContext context, File pdfFile) async {
     try {
 
       // Extract keywords from the PDF
       Map<String, List<String>> extractedData = await extractTextFromPdfAndConvertToKeywords(pdfFile);
       List<String> keywords = extractedData['keywords'] ?? [];
       List<String> sentences = extractedData['sentences'] ?? [];
-
 
       // Define the storage path
       String storagePath = 'pdfFiles/${DateTime.now().millisecondsSinceEpoch}.pdf';
@@ -124,10 +107,29 @@ class _HomeState extends State<Home> {
       String pdfId = docRef.id;
       print('PDF ID: $pdfId');
 
+      // Show an alert dialog to the user
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('PDF Uploaded'),
+            content: Text('The PDF has been uploaded successfully to Firebase collection named pdfFiles.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
     } catch (e) {
       print('Error uploading PDF and saving to Firestore: $e');
     }
   }
+
 
 
 
@@ -168,7 +170,7 @@ class _HomeState extends State<Home> {
                 });
 
                 // Upload the PDF file and save its download URL in Firestore
-                uploadPdfToFirebaseStorageAndSaveToFirestore(File(_pdfPath));
+                uploadPdfToFirebaseStorageAndSaveToFirestore(context,File(_pdfPath));
 
               }
             },

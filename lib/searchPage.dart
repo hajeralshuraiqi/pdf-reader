@@ -39,15 +39,41 @@ class _SearchPageState extends State<SearchPage> {
     return searchResults;
   }
 
-  Future<void> _deletePdfFile(String docId, String storagePath) async {
+
+
+  Future<void> _deletePdfFile(BuildContext context, String docId, String storagePath) async {
     print("Storage path: $storagePath"); // Add this line to print the storage path
 
-    // Delete the PDF file from Firebase Storage
-    await FirebaseStorage.instance.ref(storagePath).delete();
+    try {
+      // Delete the PDF file from Firebase Storage
+      await FirebaseStorage.instance.ref(storagePath).delete();
 
-    // Remove the metadata from Firestore
-    await FirebaseFirestore.instance.collection('pdfFiles').doc(docId).delete();
+      // Remove the metadata from Firestore
+      await FirebaseFirestore.instance.collection('pdfFiles').doc(docId).delete();
+
+      // Show an alert dialog to the user
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('File Deleted'),
+            content: Text('The file has been deleted successfully.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      print("Error deleting file: $e");
+    }
   }
+
 
 
   @override
@@ -147,7 +173,7 @@ class _SearchPageState extends State<SearchPage> {
                           trailing: IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: () async {
-                              await _deletePdfFile(pdfDocId, storagePath);
+                              await _deletePdfFile(context,pdfDocId, storagePath);
                               setState(() {
                                 // Refresh the list after deleting the PDF
                               });
