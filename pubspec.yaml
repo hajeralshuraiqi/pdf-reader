@@ -47,6 +47,9 @@ dependencies:
   pdf_text: ^0.5.0
   syncfusion_flutter_pdf: ^21.1.39
   photo_view: ^0.14.0
+  welltested: ^1.0.4
+  flutter_dotenv: ^5.1.0
+#  mockito: ^5.4.0
 
 dependency_overrides:
   path: ^1.8.3
@@ -73,8 +76,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+      - assets/image/reader.png
+      - .env
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

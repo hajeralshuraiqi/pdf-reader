@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pdfreader/home.dart';
 import 'package:pdfreader/searchPage.dart';
+import 'package:welltested/annotation.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,11 +41,9 @@ class _MainNavigationState extends State<MainNavigation> {
       _selectedIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
@@ -59,9 +58,11 @@ class _MainNavigationState extends State<MainNavigation> {
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+        selectedItemColor: const Color(0xFFD31010), // Set the selected icon and label color
       ),
     );
   }
+
 }
 
 

@@ -8,9 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:typed_data';
 import 'package:pdf_text/pdf_text.dart';
 import 'package:pdf_render/pdf_render.dart';
+import 'package:welltested/welltested.dart';
 
 
-
+@Welltested()
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -138,9 +139,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('PDF Viewer'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('PDF Viewer'),
+      // ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -150,7 +151,33 @@ class _HomeState extends State<Home> {
           filePath: _pdfPath,
         )
             : Center(
-          child: Text('No PDF selected'),
+          child:
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/image/reader.png', // Replace with your image path
+                width: 200,
+                height: 200,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top:20.0),
+                child: Text(
+                  'No PDF selected',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          // Container(
+          //
+          //
+          //
+          //     child: Text('No PDF selected')),
         ),
       ),
       floatingActionButton: Column(
@@ -170,16 +197,16 @@ class _HomeState extends State<Home> {
                 });
 
                 // Upload the PDF file and save its download URL in Firestore
-                uploadPdfToFirebaseStorageAndSaveToFirestore(context,File(_pdfPath));
-
+                uploadPdfToFirebaseStorageAndSaveToFirestore(context, File(_pdfPath));
               }
             },
-            child: Icon(Icons.upload_file),
+            child: Icon(Icons.upload_rounded),
             tooltip: 'Upload PDF',
+            backgroundColor: Color(0xFFD31010), // Set the button background color to #D31010
           ),
-
         ],
       ),
+
     );
   }
 }
